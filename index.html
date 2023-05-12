@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Finnventor's Password Genarator</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Finnventor's Password Genarator</h1>
+            <div class="form">
+                <label for="name-label">What is your name?</label>
+                <input type="text" id="name-input-box" class="input-box" name="name">
+                <br>
+                <label for="for-label">What is this password for?</label>
+                <input type="text" id="whatfor-input-box" class="input-box" name="whatfor">
+                <br>
+                <label for="length-label">How many charecters whould you like you password to be (16-20 charecters recemended)?</label>
+                <input type="text" id="length-input-box" class="input-box" name="length">
+                <br>
+                <button onclick="callFunction()">Genarate password</button>
+            </div>
+            <div class="disclaimer">
+                <h6>Disclaimer:</h2>
+                <h6>This password genarator stores all passwords genarated.</p>
+            </div>
+        </div>
+        <script>
+            const name_box = document.getElementById("name-input-box")
+            const for_box = document.getElementById('whatfor-input-box')
+            const length_box = document.getElementById("length-input-box")
+            function callFunction() {
+                console.log('check')
+                const name = name_box.value
+                const whatfor = for_box.value
+                const length = length_box.value
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'localhost:8000/run_it?name=name&whatfor=whatfor&charecters=length', true);
+                xhr.send();
+            }
+        </script>
+    </body>
+</html>
