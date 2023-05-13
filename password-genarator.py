@@ -1,6 +1,7 @@
 import secrets
 import string
 import sys
+from flask_cors import CORS
 
 def create_password(charecters_long) -> str:
     alphabet = string.ascii_letters + string.digits + string.punctuation
@@ -31,4 +32,4 @@ def run_it():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(host='localhost', port=8000, debug=True, threaded=True)
