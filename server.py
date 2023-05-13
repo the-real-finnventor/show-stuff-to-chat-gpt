@@ -5,20 +5,14 @@ PORT = 6543
 
 Handler = http.server.SimpleHTTPRequestHandler
 
-class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
+class MyHandler(Handler):
     def end_headers(self):
         self.send_header('Access-Control-Allow-Origin', '*')
-        http.server.SimpleHTTPRequestHandler.end_headers(self)
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        Handler.end_headers(self)
 
-class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
-    def end_headers(self):
-        self.send_header('Access-Control-Allow-Origin', 'http://localhost:6543')
-        super().end_headers()
-
-with socketserver.TCPServer(("", PORT), CORSRequestHandler) as httpd:
+with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
     print("serving at port", PORT)
-    # Add the --cors flag to enable cross-origin resource sharing
     httpd.allow_reuse_address = True
-    httpd.RequestHandlerClass = CORSRequestHandler
-    httpd.RequestHandlerClass.extensions_map['.wasm'] = 'application/wasm'
-    httpd.serve_forever(poll_interval=0.5)
+    httpd.serve_forever()
