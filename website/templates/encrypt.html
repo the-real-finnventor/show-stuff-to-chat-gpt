@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %}Encrypter{% endblock %} {% block content
+%}
+<h1 align="center">Encrypter</h1>
+<form method="POST">
+  <textarea name="password" id="password" class="form-control"></textarea>
+  <br />
+  <p>Plese enter your email and password</p>
+  <p>Email</p>
+  <textarea name="email" id="email" class="form-control"></textarea>
+  <p>Password</p>
+  <textarea name="password" id="password" class="form-control"></textarea>
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Encrypt</button>
+  </div>
+</form>
+{% endblock %}
